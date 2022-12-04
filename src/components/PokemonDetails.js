@@ -1,14 +1,9 @@
 import { useHistory } from 'react-router-dom';
 import styles from './PokemonDetails.module.scss';
+import capitalize from '../utils/capitalize';
 
 export default function PokemonDetails({ pokemon }) {
   const history = useHistory();
-
-  const capitalize = (str) => {
-    const lower = str.toLowerCase();
-    return str.charAt(0).toUpperCase() + lower.slice(1);
-  };
-
   return (
     <div className={styles.detailsContainer}>
       <img src={pokemon.sprites.front_default} alt='pokemon' />
@@ -21,6 +16,7 @@ export default function PokemonDetails({ pokemon }) {
           </tr>
         </thead>
         <tbody>
+          {/* Maps through all stats and creates a row for each with one */}
           {pokemon.stats.map((stat) => (
             <tr key={stat.stat.name}>
               <td>{stat.stat.name.toUpperCase()}</td>
@@ -29,6 +25,7 @@ export default function PokemonDetails({ pokemon }) {
           ))}
         </tbody>
       </table>
+      {/* takes the user back to the last url visited. '/' in this case */}
       <button onClick={() => history.goBack()}>Go Back</button>
     </div>
   );

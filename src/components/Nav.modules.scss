@@ -5,4 +5,10 @@ nav {
     justify-content: space-between;
     align-items: center;
     background-color: #FF9ECD;
+
+    @media (max-width: 460px) {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
 }

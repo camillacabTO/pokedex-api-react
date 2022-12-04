@@ -8,9 +8,11 @@ function App() {
   return (
     <Router>
       <div className='App'>
+        {/* Navbar will be display in all routes */}
         <Navbar />
         <div className='container'>
           <Switch>
+            {/* the :id param is used in this route to fetch the data of a specific pokemon and displays in the PokemonDetailsPage */}
             <Route path='/pokemons/:id' component={PokemonDetailsPage} />
             <Route exact path='/' component={Home} />
           </Switch>

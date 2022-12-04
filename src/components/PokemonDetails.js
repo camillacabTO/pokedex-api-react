@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom';
+import styles from './PokemonDetails.module.scss';
 
 export default function PokemonDetails({ pokemon }) {
   const history = useHistory();
@@ -9,7 +10,7 @@ export default function PokemonDetails({ pokemon }) {
   };
 
   return (
-    <div>
+    <div className={styles.detailsContainer}>
       <img src={pokemon.sprites.front_default} alt='pokemon' />
       <h2>{capitalize(pokemon.name)}</h2>
       <table>

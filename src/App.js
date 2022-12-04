@@ -9,10 +9,12 @@ function App() {
     <Router>
       <div className='App'>
         <Navbar />
-        <Switch>
-          <Route path='/pokemons/:id' component={PokemonDetailsPage} />
-          <Route exact path='/' component={Home} />
-        </Switch>
+        <div className='container'>
+          <Switch>
+            <Route path='/pokemons/:id' component={PokemonDetailsPage} />
+            <Route exact path='/' component={Home} />
+          </Switch>
+        </div>
       </div>
     </Router>
   );

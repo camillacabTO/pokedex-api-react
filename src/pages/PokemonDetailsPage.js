@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import PokemonDetails from '../components/PokemonDetails';
+import loader from '../assets/loader.gif';
 
 export default function PokemonDetailsPage() {
   const { id } = useParams();
@@ -12,9 +13,13 @@ export default function PokemonDetailsPage() {
 
   return (
     <div>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && (
+        <div className='loading'>
+          <img src={loader} alt='loading' />
+        </div>
+      )}
       {/* add loading animation */}
-      {error && <div>{error}</div>}
+      {error && <div className='error'>{error}</div>}
       {pokemon && <PokemonDetails pokemon={pokemon} />}
     </div>
   );

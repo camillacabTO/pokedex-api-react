@@ -1,5 +1,7 @@
 import { useFetch } from '../hooks/useFetch';
 import PokemonList from '../components/PokemonList';
+import styles from './Home.module.scss';
+import loader from '../assets/loader.gif';
 
 export default function Home() {
   const {
@@ -9,10 +11,13 @@ export default function Home() {
   } = useFetch('https://pokeapi.co/api/v2/pokemon?limit=151');
 
   return (
-    <div>
-      {isLoading && <div>Loading...</div>}
-      {/* add loading animation */}
-      {error && <div>{error}</div>}
+    <div className={styles.home}>
+      {isLoading && (
+        <div className='loading'>
+          <img src={loader} />
+        </div>
+      )}
+      {error && <div className='error'>{error}</div>}
       {pokemons && <PokemonList pokemons={pokemons} />}
     </div>
   );

@@ -1,15 +1,18 @@
 import { Link } from 'react-router-dom';
+import styles from './PokemonList.module.scss';
 
 export default function PokemonList({ pokemons }) {
   return (
-    <div>
+    <>
       <h1>Pokemon List</h1>
       <p>Check out our Top 151 Pokemons!</p>
-      {pokemons.results.map((pokemon, index) => (
-        <div key={pokemon.name}>
-          <Link to={`/pokemons/${index + 1}`}>{pokemon.name}</Link>
-        </div>
-      ))}
-    </div>
+      <div className={styles.grid}>
+        {pokemons.results.map((pokemon, index) => (
+          <div className={styles.item} key={pokemon.name}>
+            <Link to={`/pokemons/${index + 1}`}>{pokemon.name}</Link>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }

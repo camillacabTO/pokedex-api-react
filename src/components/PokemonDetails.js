@@ -1,12 +1,12 @@
-import { useHistory } from 'react-router-dom';
-import styles from './PokemonDetails.module.scss';
-import capitalize from '../utils/capitalize';
+import { useHistory } from "react-router-dom";
+import styles from "./PokemonDetails.module.scss";
+import capitalize from "../utils/capitalize";
 
 export default function PokemonDetails({ pokemon }) {
   const history = useHistory();
   return (
     <div className={styles.detailsContainer}>
-      <img src={pokemon.sprites.front_default} alt='pokemon' />
+      <img src={pokemon.sprites.front_default} alt="pokemon" />
       <h2>{capitalize(pokemon.name)}</h2>
       <table>
         <thead>

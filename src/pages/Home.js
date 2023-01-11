@@ -1,27 +1,58 @@
-import { useFetch } from '../hooks/useFetch';
-import PokemonList from '../components/PokemonList';
-import styles from './Home.module.scss';
-import loader from '../assets/loader.gif';
+import PokemonList from "../components/PokemonList";
+import styles from "./Home.module.scss";
+import loader from "../assets/loader.gif";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 export default function Home() {
   //using custom hook to fetch the data
+  // const {
+  //   error,
+  //   isLoading,
+  //   data: pokemons,
+  // } = useFetch('https://pokeapi.co/api/v2/pokemon?limit=60&offset=60');
+
+  const [pageUrl, setPageUrl] = useState(
+    "https://pokeapi.co/api/v2/pokemon?limit=60&offset=0"
+  );
+
+  const fetchPokemonList = async ({ queryKey }) => {
+    const res = await axios.get(queryKey[1]);
+    return res.data;
+  };
+
   const {
-    error,
     isLoading,
+    isError,
     data: pokemons,
-  } = useFetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+    error,
+  } = useQuery(["pokemons", pageUrl], fetchPokemonList, {
+    keepPreviousData: true,
+  });
+  console.log("previous", pokemons?.previous);
 
   return (
     <div className={styles.home}>
-      {/* As per the logic in the useFetch isLoading and error will always be False if the data was received with no error. If there was an error, pokemon and loading will become false and the error will be displayed to the user */}
       {isLoading && (
-        <div className='loading'>
-          {/*While it loads, displays the loader with the delay from the setTimeout to avoid flickering  */}
-          <img src={loader} />
+        <div className="loading">
+          <img src={loader} alt="loader" />
         </div>
       )}
-      {error && <div className='error'>{error}</div>}
+      {isError && <div className="error">{error}</div>}
       {pokemons && <PokemonList pokemons={pokemons} />}
+      <div>
+        {pokemons?.previous && (
+          <button onClick={() => setPageUrl((prevState) => pokemons?.previous)}>
+            Previous Page
+          </button>
+        )}
+        {pokemons?.next && (
+          <button onClick={() => setPageUrl((prevState) => pokemons?.next)}>
+            Next Page
+          </button>
+        )}
+      </div>
     </div>
   );
 }

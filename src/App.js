@@ -1,11 +1,16 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import PokemonDetailsPage from './pages/PokemonDetailsPage';
 
 function App() {
+
+  const queryClient = new QueryClient()
+
   return (
+    <QueryClientProvider client={queryClient}>
     <Router>
       <div className='App'>
         {/* Navbar will be display in all routes */}
@@ -19,6 +24,7 @@ function App() {
         </div>
       </div>
     </Router>
+    </QueryClientProvider>
   );
 }
 

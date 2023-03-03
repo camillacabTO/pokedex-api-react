@@ -7,7 +7,7 @@ export default function PokemonList({ pokemons }) {
   return (
     <>
       <h1>Pokemon List</h1>
-      <p>Check out our Top 151 Pokemons!</p>
+      <p>Check out our full list of Pokemons!</p>
       <div className={styles.grid}>
         {/* mapping through the array of pokemons and displaying their name */}
         {pokemons.results.map((pokemon, index) => (
